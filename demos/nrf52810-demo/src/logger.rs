@@ -4,7 +4,7 @@ use {
     bbqueue::{bbq, BBQueue, Consumer},
     cortex_m::interrupt,
     demo_utils::logging::{BbqLogger, StampedLogger, WriteLogger},
-    nrf52810_hal::nrf52810_pac as pac,
+    nrf52810_hal::nrf52832_pac as pac,
     rubble_nrf52::timer::StampSource,
 };
 

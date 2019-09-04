@@ -15,7 +15,7 @@ use {
     nrf52810_hal::{
         self as hal,
         gpio::Level,
-        nrf52810_pac::{self as pac, UARTE0},
+        nrf52832_pac::{self as pac, UARTE0},
         prelude::*,
         uarte::{Baudrate, Parity, Uarte},
     },
@@ -51,7 +51,7 @@ impl HardwareInterface for HwNRf52810 {
 /// at the same time unless you also generate separate device addresses.
 const TEST_BEACON: bool = false;
 
-#[app(device = nrf52810_hal::nrf52810_pac)]
+#[app(device = nrf52810_hal::nrf52832_pac)]
 const APP: () = {
     static mut BLE_TX_BUF: PacketBuffer = [0; MIN_PDU_BUF];
     static mut BLE_RX_BUF: PacketBuffer = [0; MIN_PDU_BUF];
@@ -100,8 +100,8 @@ const APP: () = {
         let p0 = device.P0.split();
 
         let mut serial = {
-            let rxd = p0.p0_08.into_floating_input().degrade();
-            let txd = p0.p0_06.into_push_pull_output(Level::Low).degrade();
+            let rxd = p0.p0_11.into_floating_input().degrade();
+            let txd = p0.p0_05.into_push_pull_output(Level::Low).degrade();
 
             let pins = hal::uarte::Pins {
                 rxd,
