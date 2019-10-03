@@ -78,8 +78,6 @@ pub trait AttributeProvider {
     /// attribute at `handle`.
     ///
     /// If `handle` does not refer to a grouping attribute, returns `None`.
-    ///
-    /// TODO: Human-readable docs that explain what grouping is
     fn group_end(&self, handle: Handle) -> Option<&Attribute<'_>>;
 }
 

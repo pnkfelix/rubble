@@ -22,8 +22,12 @@ use {
     rtfm::app,
     rubble::{
         beacon::Beacon,
+<<<<<<< Updated upstream
         config::Config,
         gatt::BatteryServiceAttrs,
+=======
+        gatt::NordicUartAttrs,
+>>>>>>> Stashed changes
         l2cap::{BleChannelMap, L2CAPState},
         link::{
             ad_structure::AdStructure,
@@ -61,10 +65,15 @@ const TEST_BEACON: bool = false;
 const APP: () = {
     static mut BLE_TX_BUF: PacketBuffer = [0; MIN_PDU_BUF];
     static mut BLE_RX_BUF: PacketBuffer = [0; MIN_PDU_BUF];
+<<<<<<< Updated upstream
     static mut BLE_LL: LinkLayer<AppConfig> = ();
     static mut TX_QUEUE: SimpleQueue = SimpleQueue::new();
     static mut RX_QUEUE: SimpleQueue = SimpleQueue::new();
     static mut BLE_R: Responder<AppConfig> = ();
+=======
+    static mut BLE_LL: LinkLayer<HwNRf52810> = ();
+    static mut BLE_R: Responder<BleChannelMap<NordicUartAttrs, NoSecurity>> = ();
+>>>>>>> Stashed changes
     static mut RADIO: BleRadio = ();
     static mut BEACON: Beacon = ();
     static mut BEACON_TIMER: pac::TIMER1 = ();
@@ -163,7 +172,7 @@ const APP: () = {
         let resp = Responder::new(
             tx,
             rx,
-            L2CAPState::new(BleChannelMap::with_attributes(BatteryServiceAttrs::new())),
+            L2CAPState::new(BleChannelMap::with_attributes(NordicUartAttrs::new())),
         );
 
         if !TEST_BEACON {
