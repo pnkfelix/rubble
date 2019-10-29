@@ -1,15 +1,10 @@
-[workspace]
-members = [
-    "rubble",
-    "rubble-nrf52",
-    "demos/*/",
-]
+[package]
+name = "rubble"
+version = "0.0.0"
+edition = "2018"
+
+[dependencies]
+nrf52810-hal = "=0.8.1"
 
 [profile.dev]
 opt-level = "s"
-
-[profile.release]
-opt-level = "s"
-debug = true
-lto = true
-codegen-units = 1
